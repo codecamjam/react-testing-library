@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import Options from "../Options";
 
-test("displays image for each schoop option from server", () => {
+test("displays image for each scoop option from server", () => {
   render(<Options optionType="scoops" />);
 
   //find images

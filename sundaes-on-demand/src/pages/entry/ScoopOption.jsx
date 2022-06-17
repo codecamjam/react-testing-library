@@ -1,8 +1,14 @@
-
-function ScoopOption() {
+import Col from "react-bootstrap/Col";
+function ScoopOption({ name, imagePath }) {
   return (
-    <div>ScoopOption</div>
-  )
+    <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: "center" }}>
+      <img
+        style={{ width: "75%" }}
+        src={`http://localhost:3030/${imagePath}`}
+        alt={`${name} scoop`}
+      />
+    </Col>
+  );
 }
 
-export default ScoopOption
+export default ScoopOption;
