@@ -1,5 +1,12 @@
+import Options from './Options';
+
 function OrderEntry() {
-  return <div>OrderEntry</div>;
+  return (
+    <div>
+      <Options optionsType="scoops" />
+      <Options optionsType="toppings" />
+    </div>
+  );
 }
 
 export default OrderEntry;
