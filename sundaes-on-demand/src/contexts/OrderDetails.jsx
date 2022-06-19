@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useMemo, useEffect } from 'react';
-import { pricePerItem } from '../constants';
-import { formatCurrency } from '../utilities';
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { pricePerItem } from "../constants";
+import { formatCurrency } from "../utilities";
 
 const OrderDetails = createContext();
 
@@ -10,7 +10,7 @@ export function useOrderDetails() {
 
   if (!context) {
     throw new Error(
-      'useOrderDetails must be used within an OrderDetailsProvider'
+      "useOrderDetails must be used within an OrderDetailsProvider"
     );
   }
 
@@ -39,8 +39,8 @@ export function OrderDetailsProvider(props) {
   });
 
   useEffect(() => {
-    const scoopsSubtotal = calculateSubtotal('scoops', optionCounts);
-    const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
+    const scoopsSubtotal = calculateSubtotal("scoops", optionCounts);
+    const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
       scoops: formatCurrency(scoopsSubtotal),
@@ -60,9 +60,16 @@ export function OrderDetailsProvider(props) {
       setOptionCounts(newOptionCounts);
     }
 
+    function resetOrder() {
+      setOptionCounts({
+        scoops: new Map(),
+        toppings: new Map(),
+      });
+    }
+
     //getter: object containing option counts for scoops and toppings, subtotals and totals
     //setter: updateOptionCount
-    return [{ ...optionCounts, totals }, updateItemCount];
+    return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
   }, [optionCounts, totals]);
 
   return <OrderDetails.Provider value={value} {...props} />;
