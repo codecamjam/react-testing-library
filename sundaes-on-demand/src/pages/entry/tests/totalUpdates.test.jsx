@@ -37,7 +37,7 @@ test('update toppings subtotal when toppings change', async () => {
   expect(toppingsTotal).toHaveTextContent('0.00');
 
   //add cherries and check subtotal
-  const cherriesCheckbox = await screen.findAllByRole('checkbox', {
+  const cherriesCheckbox = await screen.findByRole('checkbox', {
     name: 'Cherries',
   });
   userEvent.click(cherriesCheckbox);
