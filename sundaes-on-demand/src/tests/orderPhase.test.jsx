@@ -62,6 +62,10 @@ test("Order phases for happy path", async () => {
   });
   userEvent.click(confirmOrderButton);
 
+  //Expect "loading" to show
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
   //confirm order number on confirmation page
   // this one is async because there is a POST request to server in between summary
   // and confirmation pages
@@ -69,6 +73,11 @@ test("Order phases for happy path", async () => {
     name: /thank you/i,
   });
   expect(thankYouHeader).toBeInTheDocument();
+
+  //expect that loading has disappeared
+  //USE QUERYBY WHEN WE ARE NOT EXPECTING SOMETHING IN THE DOCUMENT
+  const notLoading = screen.queryByText("loading");
+  expect(notLoading).not.toBeInTheDocument();
 
   const orderNumber = await screen.findByText(/order number/i);
   expect(orderNumber).toBeInTheDocument();
